@@ -26,9 +26,10 @@ class CampaignNew extends Component {
         try {
             const accounts = await web3.eth.getAccounts();
             console.log(accounts[0]);
-            await factory.methods.createCampaign(parseInt(this.state.minimumContribution))
+            await factory.methods.createCampaign((this.state.minimumContribution))
             .send({
-                from: accounts[0]
+                from: accounts[0],
+                gas: '1000000'
             });
 
             Router.pushRoute('/');

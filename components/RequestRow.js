@@ -9,7 +9,8 @@ class RequestRow extends Component {
 
         const accounts = await web3.eth.getAccounts();
         await campaign.methods.approveRequest(this.props.id).send({
-            from: accounts[0]
+            from: accounts[0],
+            gas: '1000000'
         });
         // Reload after 1s 
         setTimeout(this.props.onReload(), 1000);

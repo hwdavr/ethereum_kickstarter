@@ -1,8 +1,15 @@
 import Web3 from 'web3';
+require('./config')
 
 let web3;
 
-if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
+if (global.gLocalTest) {
+    // Test on a local ganache server  
+    const provider = new Web3.providers.HttpProvider(
+        'http://localhost:7545'
+    );
+    web3 = new Web3(provider);
+} else if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
     // In a browser and metamask is runing
     web3 = new Web3(window.web3.currentProvider);
     console.log('In a browser and metamask is runing' + web3);

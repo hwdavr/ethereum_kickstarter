@@ -39,7 +39,10 @@ class RequestNew extends Component {
 
             await campaign.methods.createRequest(description, 
                 web3.utils.toWei(value, 'ether'), recipient)
-                .send({from: accounts[0]});
+                .send({
+                    from: accounts[0],
+                    gas: '1000000'
+                });
         } catch (err) {
             this.setState({errMessage: err.message});
         }

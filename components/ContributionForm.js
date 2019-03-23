@@ -21,7 +21,8 @@ class ContributionForm extends Component {
 
             await campaign.methods.contribute().send({
                 from: accounts[0],
-                value: web3.utils.toWei(this.state.value, 'ether')
+                value: web3.utils.toWei(this.state.value, 'ether'),
+                gas: '1000000'
             });
             Router.pushRoute('/');
         } catch(err) {

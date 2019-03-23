@@ -1,11 +1,21 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const compiledFactory = require('./build/CampaignFactory.json');
+require('./config')
 
-const provider = new HDWalletProvider(
-    'simple egg file credit wagon garbage vapor slow sunset exile glove dial',
+let provider;
+
+if (global.gLocalTest) {
+  console.log('Deploy on local node');
+  provider = new Web3.providers.HttpProvider(
+    'http://localhost:7545'
+  );
+} else {
+  console.log('Deploy on remote node');
+  provider = new Web3.providers.HttpProvider(
     'https://rinkeby.infura.io/v3/b035af3b15a7449788b306f5247aa07f'
-)
+  );
+}
 
 const web3 = new Web3(provider);
 
